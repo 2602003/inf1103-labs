@@ -1,5 +1,6 @@
 inventory = 0
 failed_entries = 0
+deliveries_processed = 0
 
 def get_valid_input():
     entry = input("Enter stock quantity (or type 'quit'): ")
@@ -17,6 +18,9 @@ def get_valid_input():
         return None
     return quantity
 
+def process_delivery(current_total, new_value):
+    return current_total + new_value
+
 while True:
     value = get_valid_input()
 
@@ -27,9 +31,10 @@ while True:
         failed_entries += 1
         continue
 
-    inventory += value
+    inventory = process_delivery(inventory, value)
+    deliveries_processed += 1
     print(f"Added {value} units. Current inventory: {inventory}")
 
 print("==========Audit Report==========")
-print(f"Total Units Processed: {inventory}")
+print(f"Total Deliveries Processed: {deliveries_processed}")
 print(f"Failed/Rejected Entries: {failed_entries}")
