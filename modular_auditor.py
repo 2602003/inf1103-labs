@@ -24,6 +24,11 @@ def process_delivery(current_total, new_value):
 def calculate_tax(amount):
     return amount * 0.10
 
+def generate_report(total_deliveries, failed_attempts):
+    print("==========Audit Report==========")
+    print(f"Total Deliveries Processed: {total_deliveries}")
+    print(f"Failed/Rejected Entries: {failed_attempts}")
+
 while True:
     value = get_valid_input()
 
@@ -38,7 +43,5 @@ while True:
     tax = calculate_tax(value)
     deliveries_processed += 1
     print(f"Added {value} units.\nCurrent inventory: {inventory}.\nTax: {tax:.2f}")
-
-print("==========Audit Report==========")
-print(f"Total Deliveries Processed: {deliveries_processed}")
-print(f"Failed/Rejected Entries: {failed_entries}")
+    
+generate_report(deliveries_processed, failed_entries)
