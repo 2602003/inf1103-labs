@@ -21,6 +21,9 @@ def get_valid_input():
 def process_delivery(current_total, new_value):
     return current_total + new_value
 
+def calculate_tax(amount):
+    return amount * 0.10
+
 while True:
     value = get_valid_input()
 
@@ -32,8 +35,9 @@ while True:
         continue
 
     inventory = process_delivery(inventory, value)
+    tax = calculate_tax(value)
     deliveries_processed += 1
-    print(f"Added {value} units. Current inventory: {inventory}")
+    print(f"Added {value} units.\nCurrent inventory: {inventory}.\nTax: {tax:.2f}")
 
 print("==========Audit Report==========")
 print(f"Total Deliveries Processed: {deliveries_processed}")
