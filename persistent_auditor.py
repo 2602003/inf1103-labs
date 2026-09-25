@@ -5,7 +5,6 @@ def load_inventory():
         with open("inventory.txt", "r") as f:
             for line in f:
                 order_id, product_name, quantity = line.strip().split(",")
-
                 orders.append([
                     int(order_id),
                     product_name,
@@ -16,22 +15,23 @@ def load_inventory():
         pass
 
     return orders
-    
-def get_valid_input():
-    entry = input("Enter stock quantity (or type 'quit'): ")
 
-    if entry.lower() == "quit":
+
+def get_valid_input():
+    product_name = input("\nEnter Product Name (or type 'quit'): ")
+
+    if product_name.lower() == "quit":
         return "quit"
 
-    if not entry.isdigit():
-        print("Error: Invalid input, must be a number.")
-        return None
-    quantity = int(entry)
+    quantity = input("Enter Quantity: ")
 
-    if quantity < 0:
-        print("Error: Negative values not allowed.")
+    if not quantity.isdigit():
+        print("Error: Invalid quantity, must be a number.")
         return None
-    return quantity
+
+    quantity = int(quantity)
+
+    return product_name, quantity
 
 def process_delivery(current_total, new_value):
     return current_total + new_value
@@ -48,14 +48,17 @@ orders = load_inventory()
 print("Current Orders:\n")
 for order in orders:
     print(f"{order[0]}, {order[1]}, {order[2]}")
+
 inventory = 0
+
+for order in orders:
+    inventory += order[2]
+
 failed_entries = 0
 deliveries_processed = 0
-
-
+history = []
 
 while True:
-
     value = get_valid_input()
 
     if value == "quit":
@@ -65,9 +68,25 @@ while True:
         failed_entries += 1
         continue
 
-    inventory = process_delivery(inventory, value)
-    tax = calculate_tax(value)
+    product_name, quantity = value
+
+    if orders:
+        next_order_id = orders[-1][0] + 1
+    else:
+        next_order_id = 1001
+
+    new_order = [next_order_id, product_name, quantity]
+    orders.append(new_order)
+
+    history.append(quantity)
+
+    inventory = process_delivery(inventory, quantity)
+    tax = calculate_tax(quantity)
     deliveries_processed += 1
-    print(f"Added {value} units.\nCurrent inventory: {inventory}.\nTax: {tax:.2f}")
+
+    print("\nNew Order Added:")
+    print(f"{new_order[0]}, {new_order[1]}, {new_order[2]}")
+    print(f"Current inventory: {inventory}.")
+    print(f"Tax: {tax:.2f}")
     
 generate_report(deliveries_processed, failed_entries)
