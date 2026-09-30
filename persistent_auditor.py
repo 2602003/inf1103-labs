@@ -16,6 +16,10 @@ def load_inventory():
 
     return orders
 
+def save_inventory(orders):
+    with open("inventory.txt", "a") as f:
+        for order in orders:
+            f.write(f"{order[0]},{order[1]},{order[2]}\n")
 
 def get_valid_input():
     product_name = input("\nEnter Product Name (or type 'quit'): ")
@@ -39,15 +43,20 @@ def process_delivery(current_total, new_value):
 def calculate_tax(amount):
     return amount * 0.10
 
-def generate_report(total_deliveries, failed_attempts):
-    print("==========Audit Report==========")
-    print(f"Total Deliveries Processed: {total_deliveries}")
+def generate_report(orders, failed_attempts):
+    print("\n==========Audit Report==========")
+    print(f"Total Transactions Recorded: {len(orders)}")
+    print(f"Total Units Processed: {sum(order[2] for order in orders)}")
+    print(f"Total Tax Collected: ${sum(calculate_tax(order[2]) for order in orders):.2f}")
     print(f"Failed/Rejected Entries: {failed_attempts}")
 
 orders = load_inventory()
 print("Current Orders:\n")
-for order in orders:
-    print(f"{order[0]}, {order[1]}, {order[2]}")
+if orders:
+    for order in orders:
+        print(f"{order[0]}, {order[1]}, {order[2]}")
+else:
+    print("(No previous orders found)")
 
 inventory = 0
 
@@ -55,13 +64,15 @@ for order in orders:
     inventory += order[2]
 
 failed_entries = 0
-deliveries_processed = 0
 history = []
+new_orders = []
 
 while True:
     value = get_valid_input()
 
     if value == "quit":
+        save_inventory(new_orders)
+        print("Order successfully saved to inventory.txt.\n")
         break
 
     if value is None:
@@ -77,16 +88,15 @@ while True:
 
     new_order = [next_order_id, product_name, quantity]
     orders.append(new_order)
+    new_orders.append(new_order)
 
     history.append(quantity)
 
     inventory = process_delivery(inventory, quantity)
     tax = calculate_tax(quantity)
-    deliveries_processed += 1
 
     print("\nNew Order Added:")
     print(f"{new_order[0]}, {new_order[1]}, {new_order[2]}")
-    print(f"Current inventory: {inventory}.")
-    print(f"Tax: {tax:.2f}")
+    print(f"Tax: ${tax:.2f} | Total Inventory: {inventory}")
     
-generate_report(deliveries_processed, failed_entries)
+generate_report(orders, failed_entries)
