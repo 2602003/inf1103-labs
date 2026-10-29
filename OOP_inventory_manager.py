@@ -23,11 +23,16 @@ def load_inventory(inventory: Inventory):
     except (json.JSONDecodeError, KeyError):
         with open("inventory.json", "w") as f:
             json.dump([], f, indent=4)
-        print(
-            "inventory.json is empty or corrupted. Reset with empty inventory."
-        )
+        print("inventory.json is empty or corrupted. Reset with empty inventory.")
 
-def add_product_menu(inventory):
+def save_inventory(inventory: Inventory):
+    inventory_data = []
+    for product in inventory.get_products():
+        inventory_data.append(product.to_dict())
+    with open("inventory.json", "w") as f:
+        json.dump(inventory_data, f, indent=4)
+
+def add_product_menu(inventory: Inventory):
     print("\nAdd New Product")
     product_id = input("Product ID: ")
     product_name = input("Product Name: ")
@@ -37,7 +42,7 @@ def add_product_menu(inventory):
     inventory.add_product(product)
     print("\nProduct added successfully!")
 
-def update_stock_menu(inventory):
+def update_stock_menu(inventory: Inventory):
     print("Update Stock")
     product_id = input("Enter Product ID to update: ")
     product = inventory.search_product(product_id)
@@ -50,7 +55,7 @@ def update_stock_menu(inventory):
     else:
         print("Product not found.")
 
-def search_product_menu(inventory):
+def search_product_menu(inventory: Inventory):
     print("\nSearch Product")
     product_id = input("Enter Product ID: ")
     product = inventory.search_product(product_id)
@@ -62,12 +67,7 @@ def search_product_menu(inventory):
     else:
         print("Product not found.")
 
-def save_inventory(inventory: Inventory):
-    inventory_data = []
-    for product in inventory.get_products():
-        inventory_data.append(product.to_dict())
-    with open("inventory.json", "w") as f:
-        json.dump(inventory_data, f, indent=4)
+
 
 def main():
     print("\nINVENTORY MANAGEMENT SYSTEM\n")
@@ -109,4 +109,5 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
-main()
+if __name__ == "__main__":
+    main()
