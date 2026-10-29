@@ -3,18 +3,30 @@
         "product_id": "P001",
         "product_name": "Laptop",
         "price": 1200.0,
-        "stock_quantity": 15
+        "stock_quantity": 20
     },
     {
         "product_id": "P002",
         "product_name": "Mouse",
         "price": 25.5,
-        "stock_quantity": 40
+        "stock_quantity": 50
     },
     {
         "product_id": "P003",
         "product_name": "Keyboard",
         "price": 45.0,
         "stock_quantity": 25
+    },
+    {
+        "product_id": "P004",
+        "product_name": "Monitor",
+        "price": 299.99,
+        "stock_quantity": 10
+    },
+    {
+        "product_id": "P005",
+        "product_name": "Headphones",
+        "price": 300.0,
+        "stock_quantity": 30
     }
 ]
