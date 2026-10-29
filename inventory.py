@@ -1,11 +1,11 @@
-from product import Product
-
 class Inventory:
     def __init__(self):
         self.__products = []
 
     def add_product(self, product):
-            self.__products.append(product)
+        if self.search_product(product.get_id()) is not None:
+            raise ValueError(f"Product ID {product.get_id()} already exists.")
+        self.__products.append(product)
 
     def search_product(self, product_id):
         for product in self.__products:
@@ -23,4 +23,4 @@ class Inventory:
             product.display_information()
 
     def get_products(self):
-        return self.__products
+        return list(self.__products)
