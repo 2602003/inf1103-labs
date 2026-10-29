@@ -18,10 +18,12 @@ class Product:
         return self.__stock_quantity
     
     def update_stock(self, new_stock_quantity: int):
+        if new_stock_quantity < 0:
+            raise ValueError("Stock quantity cannot be negative.")
         self.__stock_quantity = new_stock_quantity
 
     def display_information(self):
-        print(f"ID: {self.__product_id}| Name: {self.__product_name}| Price: ${self.__price:.2f}| Stock: {self.__stock_quantity}")
+        print(f"ID: {self.__product_id} | Name: {self.__product_name} | Price: ${self.__price:.2f} | Stock: {self.__stock_quantity}")
 
     def to_dict(self):
         return {
