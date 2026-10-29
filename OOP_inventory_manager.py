@@ -20,7 +20,7 @@ def load_inventory(inventory: Inventory):
             json.dump([], f, indent=4)
         print("inventory.json not found. Created a new inventory.json file.")
 
-    except (json.JSONDecodeError, KeyError):
+    except (json.JSONDecodeError, KeyError, ValueError):
         with open("inventory.json", "w") as f:
             json.dump([], f, indent=4)
         print("inventory.json is empty or corrupted. Reset with empty inventory.")
@@ -35,12 +35,18 @@ def save_inventory(inventory: Inventory):
 def add_product_menu(inventory: Inventory):
     print("\nAdd New Product")
     product_id = input("Product ID: ")
+    if inventory.search_product(product_id) is not None:
+        print(f"\nProduct ID {product_id} already exists.")
+        return
     product_name = input("Product Name: ")
-    price = float(input("Price: "))
-    stock = int(input("Stock Quantity: "))
-    product = Product(product_id, product_name, price, stock)
-    inventory.add_product(product)
-    print("\nProduct added successfully!")
+    try:
+        price = float(input("Price: "))
+        stock = int(input("Stock Quantity: "))
+        product = Product(product_id, product_name, price, stock)
+        inventory.add_product(product)
+        print("\nProduct added successfully!")
+    except ValueError as e:
+        print(f"\nCould not add product: {e}")
 
 def update_stock_menu(inventory: Inventory):
     print("Update Stock")
@@ -48,9 +54,12 @@ def update_stock_menu(inventory: Inventory):
     product = inventory.search_product(product_id)
     if product:
         print(f"\nProduct Found:\nName: {product.get_name()}\nCurrent Stock: {product.get_stock()}")
-        new_stock_quantity = int(input("\nEnter new stock quantity: "))
-        product.update_stock(new_stock_quantity)
-        print("\nStock updated successfully!")
+        try:
+            new_stock_quantity = int(input("\nEnter new stock quantity: "))
+            product.update_stock(new_stock_quantity)
+            print("\nStock updated successfully!")
+        except ValueError as e:
+            print(f"\nCould not update stock: {e}")
         return
     else:
         print("Product not found.")
@@ -66,8 +75,6 @@ def search_product_menu(inventory: Inventory):
         print("-" * 26)
     else:
         print("Product not found.")
-
-
 
 def main():
     print("\nINVENTORY MANAGEMENT SYSTEM\n")
