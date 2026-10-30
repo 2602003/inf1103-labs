@@ -1,4 +1,6 @@
-class Product:
+from abc import ABC, abstractmethod
+
+class Product(ABC):
     def __init__(self, product_id: str, product_name: str, price: float, stock_quantity: int):
         self.__product_id = product_id
         self.__product_name = product_name
@@ -22,8 +24,11 @@ class Product:
             raise ValueError("Stock quantity cannot be negative.")
         self.__stock_quantity = new_stock_quantity
 
+    def get_display_text(self):
+        return f"ID: {self.__product_id} | Name: {self.__product_name} | Price: ${self.__price:.2f} | Stock: {self.__stock_quantity}"
+
     def display_information(self):
-        print(f"ID: {self.__product_id} | Name: {self.__product_name} | Price: ${self.__price:.2f} | Stock: {self.__stock_quantity}")
+        print(self.get_display_text())
 
     def to_dict(self):
         return {
@@ -32,3 +37,7 @@ class Product:
             "price": self.__price,
             "stock_quantity": self.__stock_quantity
         }
+
+    @abstractmethod
+    def get_fufilment_info(self):
+        pass
