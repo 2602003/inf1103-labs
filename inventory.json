@@ -3,30 +3,64 @@
         "product_id": "P001",
         "product_name": "Laptop",
         "price": 1200.0,
-        "stock_quantity": 20
+        "stock_quantity": 20,
+        "type": "Physical",
+        "weight": 2.1
     },
     {
         "product_id": "P002",
         "product_name": "Mouse",
         "price": 25.5,
-        "stock_quantity": 50
+        "stock_quantity": 50,
+        "type": "Physical",
+        "weight": 0.1
     },
     {
         "product_id": "P003",
         "product_name": "Keyboard",
         "price": 45.0,
-        "stock_quantity": 25
+        "stock_quantity": 25,
+        "type": "Physical",
+        "weight": 0.8
     },
     {
         "product_id": "P004",
         "product_name": "Monitor",
         "price": 299.99,
-        "stock_quantity": 10
+        "stock_quantity": 10,
+        "type": "Physical",
+        "weight": 5.5
     },
     {
         "product_id": "P005",
         "product_name": "Headphones",
         "price": 300.0,
-        "stock_quantity": 30
+        "stock_quantity": 30,
+        "type": "Physical",
+        "weight": 0.3
+    },
+    {
+        "product_id": "P006",
+        "product_name": "Antivirus Software",
+        "price": 49.9,
+        "stock_quantity": 100,
+        "type": "Digital",
+        "download_size": 250.0
+    },
+    {
+        "product_id": "P007",
+        "product_name": "Webcam",
+        "price": 89.9,
+        "stock_quantity": 15,
+        "type": "Physical",
+        "weight": 0.4
+    },
+    {
+        "product_id": "P008",
+        "product_name": "Photo Editor",
+        "price": 80.0,
+        "stock_quantity": 200,
+        "type": "Digital",
+        "download_size": 450.0
     }
 ]
