@@ -10,11 +10,8 @@ class DigitalProduct(Product):
     def get_download_size(self):
         return self.__download_size
 
-    def get_display_text(self):
-        return super().get_display_text() + f" | Type: Digital | Download Size: {self.__download_size} MB"
-
-    def get_information(self):
-        return self.get_display_text()
+    def display_information(self):
+        print(super().get_display_text() + f" | Type: Digital | Download Size: {self.__download_size} MB")
 
     def get_fufilment_info(self):
         return "Delivered via download link."
