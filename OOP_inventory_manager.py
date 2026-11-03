@@ -100,7 +100,7 @@ def search_product_menu(inventory: Inventory):
         print("Product Found")
         print("-" * 26)
         product.display_information()
-        print(f"Fulfillment: {product.get_fufilment_info()}")
+        print(f"Fulfillment: {product.get_fulfilment_info()}")
         if isinstance(product, CanBeShipped):
             print(f"Shipping Cost: ${product.calculate_shipping_cost():.2f}")
         print("-" * 26)

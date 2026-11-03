@@ -13,7 +13,7 @@ class DigitalProduct(Product):
     def display_information(self):
         print(super().get_display_text() + f" | Type: Digital | Download Size: {self.__download_size} MB")
 
-    def get_fufilment_info(self):
+    def get_fulfilment_info(self):
         return "Delivered via download link."
 
     def to_dict(self):
