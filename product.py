@@ -41,6 +41,7 @@ class Product(ABC):
 
     def display_information(self) -> None:
         print(self.get_display_text())
+        self.__supplier.display_information()
 
     def to_dict(self) -> dict:
         return {
