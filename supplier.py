@@ -4,7 +4,7 @@ class Supplier:
         self.__name = name
         self.__contact_email = contact_email
 
-    def get__supplier_id(self) -> str:
+    def get_supplier_id(self) -> str:
         return self.__supplier_id
 
     def get_name(self) -> str:

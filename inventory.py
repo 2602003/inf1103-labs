@@ -29,6 +29,7 @@ class Inventory:
 
         print("Current Inventory")
         for product in self.__products:
+            print()
             product.display_information()
 
     def get_products(self) -> list[Product]:

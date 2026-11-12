@@ -49,9 +49,11 @@ class Product(ABC):
             "product_name": self.__product_name,
             "price": self.__price,
             "stock_quantity": self.__stock_quantity,
-            "supplier_id": self.__supplier.get_supplier_id(),
-            "supplier_name": self.__supplier.get_name(),
-            "supplier_email": self.__supplier.get_contact_email()
+            "supplier": {
+                "supplier_id": self.__supplier.get_supplier_id(),
+                "name": self.__supplier.get_name(),
+                "contact_email": self.__supplier.get_contact_email()
+            }
         }
 
     @abstractmethod
