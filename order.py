@@ -6,6 +6,9 @@ class Order:
         self.__order_id = order_id
         self.__order_lines: list[OrderLine] = []
 
+    def get_order_id(self) -> str:
+        return self.__order_id
+
     def add_order_line(self, product: Product, quantity: int) -> None:
         if quantity <= 0:
             raise ValueError("Quantity must be greater than zero.")

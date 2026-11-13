@@ -141,7 +141,7 @@ def create_order_menu(inventory: Inventory) -> None:
         another = input("Add another product? (y/n): ")
         if another.lower() == "n":
             break
-    print(f"\nOrder ID: {order_id}")
+    print(f"\nOrder ID: {order.get_order_id()}")
     print(f"Order Total: ${order.calculate_total():.2f}")
 
 def main():
