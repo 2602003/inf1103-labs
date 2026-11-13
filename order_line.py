@@ -17,6 +17,3 @@ class OrderLine:
 
     def calculate_subtotal(self) -> float:
         return self.__product.get_price() * self.__quantity
-
-    def display_information(self) -> None:
-        print(f"Product: {self.__product.get_name()} \nQuantity: {self.__quantity} \nLine Total: ${self.get_line_total():.2f}")
