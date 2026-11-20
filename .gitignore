@@ -1,0 +1,15 @@
+*.zip
+Cat.py
+Dog.py
+Monkey.py
+*.docx
+2602003_INF1103_Lab?/
+__pycache__/
+*.pyc
+Dockerfile
+hello.py
+auditor.py
+main.py
+inventory_manager.py
+modular_auditor.py
+

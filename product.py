@@ -10,6 +10,10 @@ class Product(ABC):
             stock_quantity: int, 
             supplier: Supplier
     ):
+        if price <= 0:
+            raise ValueError("Price must be greater than zero.")
+        if stock_quantity < 0:
+            raise ValueError("Stock quantity cannot be negative.")
         self.__product_id = product_id
         self.__product_name = product_name
         self.__price = price
