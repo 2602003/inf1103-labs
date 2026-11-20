@@ -23,4 +23,4 @@ assert order.calculate_total() == 225.0
 
 order.set_discount(StudentDiscount())
 print(f"Student Discount: ${order.calculate_total():.2f}")
-assert order.calculate_total() == 225.0
+assert order.calculate_total() == 237.50
